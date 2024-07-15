@@ -6,7 +6,13 @@
 #include "Producer.h"
 using namespace std;
 
-Producer::Producer(int id, int numProducts) : id(id), numProducts(numProducts), buffer(numProducts), types_({"SPORTS", "NEWS", "WEATHER"}), types_cnt({{"SPORTS", 0}, {"NEWS", 0}, {"WEATHER", 0}}) {}
+Producer::Producer(int id, int numProducts, Bounded_Buffer* buffer){
+    this->id = id;
+    this->numProducts = numProducts;
+    this->buffer = buffer;
+    this->types_ = {"SPORTS", "NEWS", "WEATHER"};
+    this->types_cnt = {{"SPORTS", 0}, {"NEWS", 0}, {"WEATHER", 0}};
+}
 void Producer::produce()
 {
     for (int i = 0; i < numProducts; i++)
@@ -16,7 +22,7 @@ void Producer::produce()
         types_cnt[type]++;
         char *product_c = new char[product.size() + 1];
         strcpy(product_c, product.c_str());
-        buffer.insert(product_c);
+        (*buffer).insert(product_c);
     }
-    buffer.insert("DONE");
+    (*buffer).insert("DONE");
 }
