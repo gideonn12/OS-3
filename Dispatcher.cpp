@@ -46,5 +46,8 @@ void Dispatcher::dispatch()
             count++;
         bufferIndex = (bufferIndex + 1) % bufferCount;
     }
+    bufferOut[0]->insert("DONE");
+    bufferOut[1]->insert("DONE");
+    bufferOut[2]->insert("DONE");
 }
 
