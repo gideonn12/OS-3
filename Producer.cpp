@@ -6,7 +6,8 @@
 #include "Producer.h"
 using namespace std;
 
-Producer::Producer(int id, int numProducts, Bounded_Buffer* buffer){
+Producer::Producer(int id, int numProducts, Bounded_Buffer *buffer)
+{
     this->id = id;
     this->numProducts = numProducts;
     this->buffer = buffer;
