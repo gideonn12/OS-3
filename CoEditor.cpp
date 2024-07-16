@@ -4,6 +4,7 @@
 #include <vector>
 #include "Unbounded_Buffer.h"
 #include <thread>
+#include <unistd.h>
 using namespace std;
 CoEditor::CoEditor(Unbounded_Buffer *bufferIn, Unbounded_Buffer *bufferOut)
 {
@@ -12,20 +13,22 @@ CoEditor::CoEditor(Unbounded_Buffer *bufferIn, Unbounded_Buffer *bufferOut)
 }
 void CoEditor::edit()
 {
-    int count = 0;
-    while (count < 3)
+    while (true)
     {
         if (!bufferIn->isEmpty())
         {
             char *s = bufferIn->remove();
-            this_thread::sleep_for(chrono::milliseconds(100));
             if (strcmp(s, "DONE") == 0)
             {
-                count++;
+                bufferOut->insert(s);
+                return;
             }
-            bufferOut->insert(s);
+            else
+            {
+                usleep(100000);
+                bufferOut->insert(s);
+            }
         }
     }
-    char done[] = "DONE";
-    bufferOut->insert(done);
+    return;
 }

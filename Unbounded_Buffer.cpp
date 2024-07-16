@@ -14,7 +14,7 @@ void Unbounded_Buffer::insert(char *s)
 {
     unique_lock<mutex> lck(mtx);
     buffer.push(s);
-    not_empty.notify_all();
+    not_empty.notify_one();
 }
 char *Unbounded_Buffer::remove()
 {

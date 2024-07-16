@@ -23,8 +23,9 @@ void Producer::produce()
         types_cnt[type]++;
         char *product_c = new char[product.size() + 1];
         strcpy(product_c, product.c_str());
-        (*buffer).insert(product_c);
+        buffer->insert(product_c);
     }
     char done[]= "DONE";
-    (*buffer).insert(done);
+    buffer->insert(done);
+    return;
 }

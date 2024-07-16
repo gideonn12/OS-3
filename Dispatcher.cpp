@@ -50,4 +50,5 @@ void Dispatcher::dispatch()
     bufferOut[0]->insert(done);
     bufferOut[1]->insert(done);
     bufferOut[2]->insert(done);
+    return;
 }
