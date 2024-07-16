@@ -9,29 +9,23 @@
 #include "Bounded_Buffer.h"
 using namespace std;
 
-Bounded_Buffer::Bounded_Buffer(int size) : size(size), buffer(queue<string>()) {
-    sem_init(&not_full, 0, size);
-    sem_init(&not_empty, 0, 0);
-    sem_init(&mutex, 0, 1);
-}
+Bounded_Buffer::Bounded_Buffer(int size) : size(size), buffer(queue<string>()) {}
 void Bounded_Buffer::insert(char *s)
 {
-    sem_wait(&not_full);
-    sem_wait(&mutex);
+    std::unique_lock<std::mutex> lock(mtx);
+    not_full.wait(lock, [this]() { return buffer.size() < size; });
     buffer.push(s);
-    sem_post(&mutex);
-    sem_post(&not_empty);
+    not_empty.notify_one();
 }
 char *Bounded_Buffer::remove()
 {
-    sem_wait(&not_empty);
-    sem_wait(&mutex);
-    string s = buffer.front();
+    std::unique_lock<std::mutex> lock(mtx);
+    not_empty.wait(lock, [this]() { return !buffer.empty(); });
+    std::string s = buffer.front();
     buffer.pop();
-    sem_post(&mutex);
-    sem_post(&not_full);
+    not_full.notify_one();
     char *result = new char[s.length() + 1];
-    strcpy(result, s.c_str());
+    std::strcpy(result, s.c_str());
     return result;
 }
 bool Bounded_Buffer:: isEmpty(){

@@ -12,9 +12,8 @@ class Bounded_Buffer
 private:
     int size;
     queue<string> buffer;
-    sem_t not_full;
-    sem_t not_empty;
-    sem_t mutex;
+    condition_variable not_empty;
+    condition_variable not_full;
     std::mutex mtx;
 
 public:

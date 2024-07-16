@@ -17,7 +17,7 @@ void CoEditor::edit()
     {
         char *s = bufferIn->remove();
         this_thread::sleep_for(chrono::milliseconds(100));
-        if (*s == 'DONE')
+        if (strcmp(s, "DONE") == 0)
         {
             count++;
         }
