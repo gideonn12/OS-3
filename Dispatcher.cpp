@@ -41,10 +41,7 @@ void Dispatcher::dispatch()
                     bufferOut[2]->insert(s);
                 }
             }
-            else
-            {
-            }
-            if (*s == 'DONE')
+            if (strcmp(s, "DONE") == 0)
                 count++;
         }
         bufferIndex = (bufferIndex + 1) % bufferCount;
