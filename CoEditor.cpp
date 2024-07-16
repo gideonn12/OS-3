@@ -26,5 +26,6 @@ void CoEditor::edit()
             bufferOut->insert(s);
         }
     }
-    bufferOut->insert("DONE");
+    char done[] = "DONE";
+    bufferOut->insert(done);
 }

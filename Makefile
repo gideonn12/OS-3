@@ -14,7 +14,7 @@ SOURCES = main.cpp CoEditor.cpp Dispatcher.cpp Producer.cpp ScreenManager.cpp Bo
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Executable name
-EXECUTABLE = app
+EXECUTABLE = ex3.out
 
 all: $(EXECUTABLE)
 

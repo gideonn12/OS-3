@@ -25,5 +25,6 @@ void Producer::produce()
         strcpy(product_c, product.c_str());
         (*buffer).insert(product_c);
     }
-    (*buffer).insert("DONE");
+    char done[]= "DONE";
+    (*buffer).insert(done);
 }
