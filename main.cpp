@@ -15,31 +15,40 @@ int main()
     vector <Unbounded_Buffer*> bufferOut;
     vector <CoEditor*> coeditors;
     vector <thread> threads;
+
     for(int i =0; i<6; i++)
     {
         Bounded_Buffer *b = new Bounded_Buffer(10);
         bufferIn.push_back(b);
     }
+    // PRODUCERS
     for(int i =0; i<6; i++)
     {
-        Producer *p = new Producer(i,5,bufferIn[i]);
+        Producer *p = new Producer(i+1,5,bufferIn[i]);
         producers.push_back(p);
     }
+    // SPORT NEWS WEATHER BUFFERS
     Unbounded_Buffer *sports = new Unbounded_Buffer("sports");
     Unbounded_Buffer *news = new Unbounded_Buffer("news");
     Unbounded_Buffer *weather = new Unbounded_Buffer("weather");
     bufferOut.push_back(sports);
     bufferOut.push_back(news);
     bufferOut.push_back(weather);
+    // MANAGER INPUT BUFFER 
     Unbounded_Buffer *manager = new Unbounded_Buffer("manager");
+    // SCREEN MANAGER
     ScreenManager *sm = new ScreenManager(manager);
+    // COEDITORS
     CoEditor *sports_editor = new CoEditor(sports,manager);
     CoEditor *news_editor = new CoEditor(news,manager);
     CoEditor *weather_editor = new CoEditor(weather,manager);
     coeditors.push_back(sports_editor);
     coeditors.push_back(news_editor);
     coeditors.push_back(weather_editor);
+    // DISPATCHER
     Dispatcher *d = new Dispatcher(6,bufferIn,bufferOut);
+
+    // RUN ALL THREADS
     // producer run
     for(Producer *p : producers)
     {
