@@ -15,13 +15,16 @@ void CoEditor::edit()
     int count = 0;
     while (count < 3)
     {
-        char *s = bufferIn->remove();
-        this_thread::sleep_for(chrono::milliseconds(100));
-        if (strcmp(s, "DONE") == 0)
+        if (!bufferIn->isEmpty())
         {
-            count++;
+            char *s = bufferIn->remove();
+            this_thread::sleep_for(chrono::milliseconds(100));
+            if (strcmp(s, "DONE") == 0)
+            {
+                count++;
+            }
+            bufferOut->insert(s);
         }
-        bufferOut->insert(s);
     }
     bufferOut->insert("DONE");
 }
