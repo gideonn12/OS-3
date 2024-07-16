@@ -20,34 +20,36 @@ void Dispatcher::dispatch()
     int count = 0;
     while (count < producers)
     {
-        char *s = bufferIn[bufferIndex]->remove();
-        int k, j;
-        char type[100];
-        int parsed = sscanf(s, "producer %d %99s %d", &k, type, &j);
-        if (parsed == 3)
+        if (!bufferIn[bufferIndex]->isEmpty())
         {
-            if (strcmp(type, "SPORTS") == 0)
+            char *s = bufferIn[bufferIndex]->remove();
+            int k, j;
+            char type[100];
+            int parsed = sscanf(s, "producer %d %99s %d", &k, type, &j);
+            if (parsed == 3)
             {
-                bufferOut[0]->insert(s);
+                if (strcmp(type, "SPORTS") == 0)
+                {
+                    bufferOut[0]->insert(s);
+                }
+                else if (strcmp(type, "NEWS") == 0)
+                {
+                    bufferOut[1]->insert(s);
+                }
+                else if (strcmp(type, "WEATHER") == 0)
+                {
+                    bufferOut[2]->insert(s);
+                }
             }
-            else if (strcmp(type, "NEWS") == 0)
+            else
             {
-                bufferOut[1]->insert(s);
             }
-            else if (strcmp(type, "WEATHER") == 0)
-            {
-                bufferOut[2]->insert(s);
-            }
+            if (*s == 'DONE')
+                count++;
         }
-        else
-        {
-        }
-        if (*s == 'DONE')
-            count++;
         bufferIndex = (bufferIndex + 1) % bufferCount;
     }
     bufferOut[0]->insert("DONE");
     bufferOut[1]->insert("DONE");
     bufferOut[2]->insert("DONE");
 }
-

@@ -34,3 +34,7 @@ char *Bounded_Buffer::remove()
     strcpy(result, s.c_str());
     return result;
 }
+bool Bounded_Buffer:: isEmpty(){
+    unique_lock<std::mutex> lock(mtx);
+    return buffer.empty();
+}
