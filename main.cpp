@@ -25,13 +25,13 @@ int main()
         Producer *p = new Producer(i,5,bufferIn[i]);
         producers.push_back(p);
     }
-    Unbounded_Buffer *sports = new Unbounded_Buffer();
-    Unbounded_Buffer *news = new Unbounded_Buffer();
-    Unbounded_Buffer *weather = new Unbounded_Buffer();
+    Unbounded_Buffer *sports = new Unbounded_Buffer("sports");
+    Unbounded_Buffer *news = new Unbounded_Buffer("news");
+    Unbounded_Buffer *weather = new Unbounded_Buffer("weather");
     bufferOut.push_back(sports);
     bufferOut.push_back(news);
     bufferOut.push_back(weather);
-    Unbounded_Buffer *manager = new Unbounded_Buffer();
+    Unbounded_Buffer *manager = new Unbounded_Buffer("manager");
     ScreenManager *sm = new ScreenManager(manager);
     CoEditor *sports_editor = new CoEditor(sports,manager);
     CoEditor *news_editor = new CoEditor(news,manager);

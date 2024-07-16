@@ -18,7 +18,6 @@ private:
     std::mutex mtx;
 
 public:
-    Bounded_Buffer() = default;
     Bounded_Buffer(int size);
     void insert(char *s);
     char *remove();

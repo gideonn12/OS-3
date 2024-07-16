@@ -6,7 +6,6 @@
 using namespace std;
 #include "Unbounded_Buffer.h"
 
-Unbounded_Buffer::Unbounded_Buffer() = default;
 Unbounded_Buffer::Unbounded_Buffer(string name)
 {
     this->name = name;
@@ -27,4 +26,9 @@ char *Unbounded_Buffer::remove()
     char *result = new char[s.length() + 1];
     strcpy(result, s.c_str());
     return result;
+}
+bool Unbounded_Buffer::isEmpty()
+{
+    unique_lock<mutex> lck(mtx);
+    return buffer.size() == 0;
 }

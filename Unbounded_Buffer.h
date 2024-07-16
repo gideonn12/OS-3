@@ -13,10 +13,11 @@ private:
     mutex mtx;
     condition_variable not_empty;
     string name;
+    
 public:
-    Unbounded_Buffer() = default;
     Unbounded_Buffer(string name);
     void insert(char *s);
     char *remove();
+    bool isEmpty();
 };
 #endif // UNBOUNDED_BUFFER_H
