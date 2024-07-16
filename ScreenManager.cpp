@@ -14,8 +14,10 @@ void ScreenManager::display()
         if (!bufferIn->isEmpty())
         {
             char *s = bufferIn->remove();
-            cout << s << endl;
-            if (strcmp(s, "END") == 0)
+            if(strcmp(s, "DONE") != 0)
+                cout << s << endl;
+//            cout << s << endl;
+            if (strcmp(s, "DONE") == 0)
             {
                 count++;
             }
