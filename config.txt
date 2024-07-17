@@ -1,13 +1,21 @@
 PRODUCER 1
-4
+1
 queue size = 5
 
 PRODUCER 2
-3
+2
 queue size = 5
 
 PRODUCER 3
-5
+1
+queue size = 5
+
+PRODUCER 4
+3
+queue size = 5
+
+PRODUCER 5
+1
 queue size = 5
 
 Co-Editor queue size = 15

@@ -19,7 +19,7 @@ void Producer::produce()
     for (int i = 0; i < numProducts; i++)
     {
         string type = types_[rand() % 3];
-        string product = "producer "+to_string(id) +" "+ type +" "+ to_string(types_cnt[type]);
+        string product = "Producer "+to_string(id) +" "+ type +" "+ to_string(types_cnt[type]);
         types_cnt[type]++;
         char *product_c = new char[product.size() + 1];
         strcpy(product_c, product.c_str());

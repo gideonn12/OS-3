@@ -25,7 +25,7 @@ void Dispatcher::dispatch()
             char *s = bufferIn[bufferIndex]->remove();
             int k, j;
             char type[100];
-            int parsed = sscanf(s, "producer %d %99s %d", &k, type, &j);
+            int parsed = sscanf(s, "Producer %d %99s %d", &k, type, &j);
             if (parsed == 3)
             {
                 if (strcmp(type, "SPORTS") == 0)
